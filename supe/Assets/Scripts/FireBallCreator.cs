@@ -11,7 +11,7 @@ public class FireBallCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -22,16 +22,22 @@ public class FireBallCreator : MonoBehaviour
 
     void CreateBall(GameObject ball)
     {
-        if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) >= 0.1)
+        if (OVRInput.GetDown(OVRInput.Button.Four))
         {
-            Instantiate(ball, leftOffset.transform.position, leftOffset.transform.rotation);
+            GameObject currentFireBall = Instantiate(ball, leftOffset.transform.position, leftOffset.transform.rotation);
+            currentFireBall.GetComponent<Rigidbody>().AddForce(leftOffset.transform.forward * 8, ForceMode.Impulse);
+            return;
         }
-        if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) >= 0.1)
+        if (OVRInput.GetDown(OVRInput.Button.Two)||Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(ball, rightOffset.transform.position, rightOffset.transform.rotation);
+            GameObject currentFireBall = Instantiate(ball, rightOffset.transform.position, rightOffset.transform.rotation);
+            currentFireBall.GetComponent<Rigidbody>().AddForce(rightOffset.transform.forward * 8, ForceMode.Impulse);
         }
 
+        
     }
 
     
+
+
 }
