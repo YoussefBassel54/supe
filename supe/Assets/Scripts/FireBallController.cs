@@ -9,6 +9,8 @@ public class FireBallController : MonoBehaviour
     public float blastRadius = 5f;
     public float explosionForce = 10;
     
+
+    //logic for explosion physics of fire ball
     void OnCollisionEnter(Collision collision)
     {
         StartCoroutine(StartExplosion(collision));
@@ -27,6 +29,7 @@ public class FireBallController : MonoBehaviour
  
 
 
+    //timer logic to destroy created fire ball instance and particle system after collision
     IEnumerator StartExplosion(Collision collision)
     {
         ContactPoint contact = collision.contacts[0];
