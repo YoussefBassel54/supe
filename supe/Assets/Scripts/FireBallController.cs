@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FireBallController : MonoBehaviour
-{
+{    
     public GameObject explosion;
+    public GameObject explosionAudio;
     public float dieTime = 5f;
     public float blastRadius = 5f;
     public float explosionForce = 10;
@@ -13,6 +14,7 @@ public class FireBallController : MonoBehaviour
     //logic for explosion physics of fire ball
     void OnCollisionEnter(Collision collision)
     {
+        ExplosionAudioPlayer.instance.PlayExplosionSound();
         StartCoroutine(StartExplosion(collision));
         Collider[] colliders = Physics.OverlapSphere(transform.position, blastRadius);
 
@@ -24,6 +26,7 @@ public class FireBallController : MonoBehaviour
                 rb.AddExplosionForce(explosionForce, transform.position, blastRadius);
             }
         }
+        
         Destroy(gameObject);
     }
  
@@ -37,9 +40,10 @@ public class FireBallController : MonoBehaviour
         Vector3 position = contact.point;
         GameObject explosionParticle = Instantiate(explosion, position, rotation);
 
-        var x=explosionParticle.GetComponent<ParticleSystem>();
+        var x = explosionParticle.GetComponent<ParticleSystem>();
+        explosionAudio.GetComponent<ExplosionAudioPlayer>();
         x.Play();
-
+        
 
         
 

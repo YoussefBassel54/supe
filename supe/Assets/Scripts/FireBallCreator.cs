@@ -34,7 +34,7 @@ public class FireBallCreator : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.Button.Two)||Input.GetKeyDown(KeyCode.Space)) //the space control is for testing directly in the editor without building
         {
             GameObject currentFireBall = Instantiate(ball, rightOffset.transform.position, rightOffset.transform.rotation);
-            currentFireBall.GetComponent<Rigidbody>().AddForce(rightOffset.transform.forward * 8, ForceMode.Impulse);
+            currentFireBall.GetComponent<Rigidbody>().AddForce(rightOffset.transform.forward * 8, ForceMode.Impulse);            
             return;
         }
 
